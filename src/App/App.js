@@ -5,8 +5,13 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
+import HandleError from '../HandleError';
+
 import ApiContext from '../ApiContext';
 import config from '../config';
+
 import './App.css';
 
 class App extends Component {
@@ -41,6 +46,22 @@ class App extends Component {
     });
   };
 
+  handleAddFolder = (folder) => {
+    const newFolders = this.state.folders;
+    newFolders.push(folder);
+    this.setState({
+      folders: newFolders,
+    });
+  };
+
+  handleAddNote = (note) => {
+    const newNotes = this.state.notes;
+    newNotes.push(note);
+    this.setState({
+      notes: newNotes,
+    });
+  };
+
   renderNavRoutes() {
     return (
       <>
@@ -48,8 +69,8 @@ class App extends Component {
           <Route exact key={path} path={path} component={NoteListNav} />
         ))}
         <Route path='/note/:noteId' component={NotePageNav} />
-        <Route path='/add-folder' component={NotePageNav} />
-        <Route path='/add-note' component={NotePageNav} />
+        <Route path='/add-folder' component={AddFolder} />
+        <Route path='/add-note' component={AddNote} />
       </>
     );
   }
@@ -70,18 +91,24 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
     };
     return (
       <ApiContext.Provider value={value}>
         <div className='App'>
-          <nav className='App__nav'>{this.renderNavRoutes()}</nav>
+          <HandleError>
+            <nav className='App__nav'>{this.renderNavRoutes()}</nav>
+          </HandleError>
           <header className='App__header'>
             <h1>
               <Link to='/'>Noteful</Link>{' '}
               <FontAwesomeIcon icon='check-double' />
             </h1>
           </header>
-          <main className='App__main'>{this.renderMainRoutes()}</main>
+          <HandleError>
+            <main className='App__main'>{this.renderMainRoutes()}</main>
+          </HandleError>
         </div>
       </ApiContext.Provider>
     );
