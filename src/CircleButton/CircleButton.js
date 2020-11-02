@@ -19,7 +19,7 @@ NavCircleButton.defaultProps = {
 };
 
 // added PropTypes here!
-NavCircleButton.PropTypes = {
+NavCircleButton.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.string,
 };
