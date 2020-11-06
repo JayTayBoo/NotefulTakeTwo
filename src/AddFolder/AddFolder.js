@@ -67,7 +67,7 @@ export default class AddFolder extends React.Component {
       >
         <h2>Add Folder</h2>
         <div className='folderName'>
-          <label htmlFor='name'>Name *</label>
+          <label htmlFor='name'>Name</label>
           <input
             type='text'
             className='creation__control'

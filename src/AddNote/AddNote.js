@@ -35,9 +35,17 @@ export default class AddNote extends React.Component {
     const name = this.state.name.noteName;
     const desc = this.state.desc.noteDesc;
     const folderId = this.state.folderId.id;
+    let date = new Date();
 
     // turning data into JSON for API Fetch
-    const note = JSON.stringify({ name: name, desc: desc, folderId: folderId });
+    const note = JSON.stringify({
+      name: name,
+      desc: desc,
+      folderId: folderId,
+      modified: date,
+    });
+
+    console.log(note);
 
     // basic validation for name, desc, and folderId befor submitting
     if (!name || name.length < 3) {
@@ -98,9 +106,9 @@ export default class AddNote extends React.Component {
     return (
       <form
         className='addNote'
-        onSubmit={(e) => {
+        onSubmit={(event) => {
           console.log(' Note Submitted!');
-          this.handleAddNote(e);
+          this.handleAddNote(event);
         }}
       >
         <h2>Add Note</h2>
@@ -121,7 +129,7 @@ export default class AddNote extends React.Component {
             className='createNote'
             name='desc'
             id='desc'
-            onChange={(e) => this.updateDesc(e.target.value)}
+            onChange={(event) => this.updateDesc(event.target.value)}
           />
         </div>
         <div className='folderId'>
