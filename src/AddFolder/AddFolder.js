@@ -38,12 +38,13 @@ export default class AddFolder extends React.Component {
       body: folder,
     })
       .then((res) => {
-        if (!res.ok) return res.json().then(() => Promise.reject());
+        if (!res.ok) return res.json().then((e) => Promise.reject(e));
         return res.json();
       })
       // addFolder is in ApiContext
       .then((data) => {
         this.context.addFolder(data);
+        this.props.history.push('/');
       })
       .catch((error) => {
         console.error({ error });
@@ -61,7 +62,6 @@ export default class AddFolder extends React.Component {
       <form
         className='addFolder'
         onSubmit={(e) => {
-          console.log('Form Sumbitted!');
           this.handleAddFolder(e);
         }}
       >

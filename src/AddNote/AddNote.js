@@ -7,11 +7,11 @@ import ValidationError from '../ValidationError/ValidationError';
 export default class AddNote extends React.Component {
   state = {
     name: { noteName: '', touched: false },
-    desc: { noteDesc: '', touched: false },
+    content: { noteContent: '', touched: false },
     folderId: { id: '' },
     noError: true,
     nameError: '',
-    descError: '',
+    contentError: '',
     folderIdError: '',
   };
 
@@ -22,8 +22,8 @@ export default class AddNote extends React.Component {
     this.setState({ name: { noteName: name, touched: true } });
   };
 
-  updateDesc = (desc) => {
-    this.setState({ desc: { noteDesc: desc, touched: true } });
+  updatecontent = (content) => {
+    this.setState({ content: { noteContent: content, touched: true } });
   };
 
   updateFolderId = (folderId) => {
@@ -33,31 +33,29 @@ export default class AddNote extends React.Component {
   handleAddNote = (event) => {
     event.preventDefault();
     const name = this.state.name.noteName;
-    const desc = this.state.desc.noteDesc;
+    const content = this.state.content.noteContent;
     const folderId = this.state.folderId.id;
     let date = new Date();
 
     // turning data into JSON for API Fetch
     const note = JSON.stringify({
       name: name,
-      desc: desc,
+      content: content,
       folderId: folderId,
       modified: date,
     });
 
-    console.log(note);
-
-    // basic validation for name, desc, and folderId befor submitting
+    // basic validation for name, content, and folderId befor submitting
     if (!name || name.length < 3) {
       return this.setState({
         noError: false,
         nameError: 'Please enter a name that is 3 or more characters!',
       });
     }
-    if (!desc || desc.length > 500) {
+    if (!content || content.length > 500) {
       return this.setState({
         noError: false,
-        descError: 'Please add a note that is less than 500 characters!',
+        contentError: 'Please add a note that is less than 500 characters!',
       });
     }
     if (!folderId) {
@@ -82,6 +80,7 @@ export default class AddNote extends React.Component {
       // addNote is in ApiContext
       .then((data) => {
         this.context.addNote(data);
+        this.props.history.push('/');
       })
       .catch((error) => {
         console.error({ error });
@@ -95,8 +94,8 @@ export default class AddNote extends React.Component {
       if (this.state.nameError !== '') {
         errorMessage += this.state.nameError;
       }
-      if (this.state.descError !== '') {
-        errorMessage += this.state.descError;
+      if (this.state.contentError !== '') {
+        errorMessage += this.state.contentError;
       }
       if (this.state.folderIdError !== '') {
         errorMessage += this.state.folderIdError;
@@ -107,7 +106,6 @@ export default class AddNote extends React.Component {
       <form
         className='addNote'
         onSubmit={(event) => {
-          console.log(' Note Submitted!');
           this.handleAddNote(event);
         }}
       >
@@ -122,14 +120,14 @@ export default class AddNote extends React.Component {
             onChange={(event) => this.updateName(event.target.value)}
           />
         </div>
-        <div className='notedesc'>
-          <label htmlFor='desc'> Enter your note here</label>
+        <div className='noteContent'>
+          <label htmlFor='content'> Enter your note here</label>
           <input
             type='text area'
             className='createNote'
-            name='desc'
-            id='desc'
-            onChange={(event) => this.updateDesc(event.target.value)}
+            name='content'
+            id='content'
+            onChange={(event) => this.updatecontent(event.target.value)}
           />
         </div>
         <div className='folderId'>

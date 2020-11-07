@@ -7,7 +7,7 @@ export default class Dropdown extends Component {
 
   render() {
     const { folders } = this.context;
-    console.log(folders);
+
     return (
       <div>
         <label htmlFor='folders'>Choose a Folder</label>
