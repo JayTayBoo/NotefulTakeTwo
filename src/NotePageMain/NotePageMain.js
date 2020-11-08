@@ -41,6 +41,8 @@ export default class NotePageMain extends React.Component {
 
 // added proptypes here!
 NotePageMain.propTypes = {
-  noteId: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
   history: PropTypes.object,
 };

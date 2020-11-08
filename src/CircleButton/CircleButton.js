@@ -21,6 +21,6 @@ NavCircleButton.defaultProps = {
 // added PropTypes here!
 NavCircleButton.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes,
-  tag: PropTypes.string.isRequired,
+  children: PropTypes.array,
+  tag: PropTypes.func.isRequired,
 };
