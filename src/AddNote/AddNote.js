@@ -3,6 +3,7 @@ import ApiContext from '../ApiContext';
 import config from '../config';
 import Dropdown from '../Dropdown/Dropdown';
 import ValidationError from '../ValidationError/ValidationError';
+import PropTypes from 'prop-types';
 
 export default class AddNote extends React.Component {
   state = {
@@ -143,3 +144,8 @@ export default class AddNote extends React.Component {
     );
   }
 }
+
+// added PropTypes here!
+AddNote.propTypes = {
+  history: PropTypes.object,
+};

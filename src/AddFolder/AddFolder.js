@@ -2,6 +2,7 @@ import React from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import ValidationError from '../ValidationError/ValidationError';
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends React.Component {
   static contextType = ApiContext;
@@ -90,3 +91,8 @@ export default class AddFolder extends React.Component {
     );
   }
 }
+
+// added PropTypes here!
+AddFolder.propTypes = {
+  history: PropTypes.object,
+};
