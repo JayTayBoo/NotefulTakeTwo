@@ -23,3 +23,6 @@ NavCircleButton.propTypes = {
   className: PropTypes.string.isRequired,
   children: PropTypes.array,
 };
+
+
+{'attachment_id' : 'muzzle_flash','attachment_name': 'Flash Guard','compatible_weapons': {'assault': ['ara', 'arb', 'arc', 'ard', 'are', 'arf', 'arg', 'arh', 'ari', 'arj', 'ark', 'arl'], 'smg' :[] 'shotgun': [], 'lmg': [], 'marksman': [], 'sniper': [], 'handgun': []},}
